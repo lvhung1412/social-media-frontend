@@ -225,7 +225,7 @@ const Sidebar = () => {
 
     // LOGOUT
     const handleLogout = () => {
-        toast.dark('Waiting a minute!');
+        toast.dark('Đang chờ một chút!');
         setTimeout(() => {
             dispatch(updateCurrentRoom({}));
             dispatch(logoutUser());
@@ -265,7 +265,7 @@ const Sidebar = () => {
                     icon={<HomeOutlined style={iconStyle} />}
                     activeIcon={<Home style={iconStyle} />}
                     isActive={activeTab === ''}
-                    title="Home"
+                    title="Trang chủ"
                     onClick={() => {
                         setActiveTab('');
                         navigate('/');
@@ -278,14 +278,14 @@ const Sidebar = () => {
                             icon={<Search style={iconStyle} />}
                             activeIcon={<Search style={iconStyle} />}
                             isActive={activeTab === 'search'}
-                            title="Search"
+                            title="Tìm kiếm"
                             onClick={() => setActiveTab('search')}
                         />
                     </div>
                     <div className={cx('input-search', 'sidebar-search-item')} ref={inputSearchRef}>
                         <input
                             style={{ paddingLeft: '35px' }}
-                            placeholder="Search user..."
+                            placeholder="Tìm kiếm..."
                             value={searchValue}
                             onChange={(e) => {
                                 const value = e.target.value;
@@ -316,16 +316,16 @@ const Sidebar = () => {
                         icon={<NotificationsNoneOutlined style={iconStyle} />}
                         activeIcon={<Notifications style={iconStyle} />}
                         isActive={activeTab === 'notifications'}
-                        title="Notifications"
+                        title="Thông báo"
                         onClick={() => setActiveTab('notifications')}
                     />
 
                     <div className={cx('notify-result', !showNotifyResult && 'hidden', isDarkMode ? 'theme-dark' : '')}>
                         <div className={cx('top')}>
-                            <h4 className={cx('notify-title')}>Notifications</h4>
+                            <h4 className={cx('notify-title')}>Thông báo</h4>
                             <div className={cx('mark')} onClick={seenAll}>
                                 <BsCheckAll size={24} />
-                                Mark all seen
+                                Đánh dấu tất cả đã xem
                             </div>
                         </div>
 
@@ -343,7 +343,7 @@ const Sidebar = () => {
                             </div>
                         ) : (
                             <div className={cx('result-notify')}>
-                                <span>No notify</span>
+                                <span>Không có thông báo</span>
                             </div>
                         )}
                     </div>
@@ -354,7 +354,7 @@ const Sidebar = () => {
                         icon={<FavoriteBorder style={iconStyle} />}
                         activeIcon={<Favorite style={iconStyle} />}
                         isActive={activeTab === 'invitations'}
-                        title="Invitations"
+                        title="Lời mời kết bạn"
                         onClick={() => setActiveTab('invitations')}
                     />
 
@@ -366,7 +366,7 @@ const Sidebar = () => {
                             'small-wrap',
                         )}
                     >
-                        <h4 className={cx('notify-title')}>Friend Invitations</h4>
+                        <h4 className={cx('notify-title')}>Lời mời kết bạn</h4>
                         {listInvitation.length > 0 ? (
                             <div className={cx('list-notify')}>
                                 {listInvitation.map((result) => (
@@ -377,7 +377,7 @@ const Sidebar = () => {
                             </div>
                         ) : (
                             <div className={cx('result-notify')}>
-                                <span>No Invitation</span>
+                                <span>Không có lời mời</span>
                             </div>
                         )}
                     </div>
@@ -388,7 +388,7 @@ const Sidebar = () => {
                     icon={<ChatOutlined style={iconStyle} />}
                     activeIcon={<Chat style={iconStyle} />}
                     isActive={activeTab === 'messages'}
-                    title="Messages"
+                    title="Tin nhắn"
                     onClick={() => {
                         setActiveTab('messages');
                         navigate('/messages');
@@ -398,7 +398,7 @@ const Sidebar = () => {
                     icon={<AddCircleOutline style={iconStyle} />}
                     activeIcon={<AddCircle style={iconStyle} />}
                     isActive={activeTab === 'create'}
-                    title="Create"
+                    title="Tạo bài viết"
                     onClick={() => {
                         setActiveTab('create');
                         setModal(true);
@@ -408,7 +408,7 @@ const Sidebar = () => {
                     icon={<AppAvatar src={userInfo.avatar} size={24} alt="" />}
                     activeIcon={<AppAvatar src={userInfo.avatar} size={30} alt="" />}
                     isActive={activeTab === 'profile'}
-                    title="Profile"
+                    title="Hồ sơ"
                     onClick={() => {
                         setActiveTab('profile');
                         navigate('/profile');
@@ -420,7 +420,7 @@ const Sidebar = () => {
                     icon={<Menu style={iconStyle} />}
                     activeIcon={<Menu style={iconStyle} />}
                     isActive={activeTab === 'more'}
-                    title="More"
+                    title="Thêm"
                     onClick={() => {
                         setActiveTab('more');
                     }}
@@ -434,11 +434,11 @@ const Sidebar = () => {
                             dispatch(headerLayout());
                         }}
                     >
-                        <span>Change layout</span>
+                        <span>Thay đổi giao diện</span>
                         <div title="Dark/Light mode" style={{ height: '30px' }}></div>
                     </div>
                     <div className={cx('dropdown-item')} onClick={handleLogout}>
-                        <span>Logout</span>
+                        <span>Đăng xuất</span>
                     </div>
                 </div>
             </div>

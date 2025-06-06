@@ -50,7 +50,7 @@ const HomeAdmin = () => {
 
     //xử lý khi Logout
     const handleLogout = () => {
-        toast.dark('Waiting a minute!');
+        toast.dark('Đang chờ một chút!');
         setTimeout(() => {
             dispatch(logoutUser());
             navigate('/login/admin');
@@ -212,7 +212,7 @@ const HomeAdmin = () => {
                         icon={<HomeOutlined style={iconStyle} />}
                         activeIcon={<Home style={iconStyle} />}
                         isActive={title === 'Dashboard'}
-                        title="Dashboard"
+                        title="Bảng điều khiển"
                         onClick={() => {
                             setTitle('Dashboard');
                             setTableKey(0);
@@ -223,7 +223,7 @@ const HomeAdmin = () => {
                         icon={<ManageAccountsOutlined style={iconStyle} />}
                         activeIcon={<ManageAccounts style={iconStyle} />}
                         isActive={title === 'Manage User'}
-                        title="Manage User"
+                        title="Quản lý người dùng"
                         onClick={() => {
                             setTitle('Manage User');
                             setTableKey(1);
@@ -234,7 +234,7 @@ const HomeAdmin = () => {
                         icon={<AssignmentOutlined style={iconStyle} />}
                         activeIcon={<Assignment style={iconStyle} />}
                         isActive={title === 'Manage Post'}
-                        title="Manage Post"
+                        title="Quản lý bài viết"
                         onClick={() => {
                             setTitle('Manage Post');
                             setTableKey(2);
@@ -244,7 +244,7 @@ const HomeAdmin = () => {
                         icon={<TextsmsOutlined style={iconStyle} />}
                         activeIcon={<Textsms style={iconStyle} />}
                         isActive={title === 'Manage Comment'}
-                        title="Manage Comment"
+                        title="Quản lý bình luận"
                         onClick={() => {
                             setTitle('Manage Comment');
                             setTableKey(3);
@@ -255,7 +255,7 @@ const HomeAdmin = () => {
                     icon={<Logout style={iconStyle} />}
                     activeIcon={<Logout style={iconStyle} />}
                     isActive={activeTab === 'logout'}
-                    title="Logout"
+                    title="Đăng xuất"
                     onClick={() => {
                         setActiveTab('logout');
                         handleLogout();
@@ -271,21 +271,21 @@ const HomeAdmin = () => {
                             <div className={cx('header-item')}>
                                 <div className={cx('header-title')}>
                                     <Person style={{ ...iconStyle, fontSize: '4rem', color: 'var(--primary)' }} />
-                                    <span>Users</span>
+                                    <span>Người dùng</span>
                                 </div>
                                 <span className={cx('header-count')}>{countAll.countUser}</span>
                             </div>
                             <div className={cx('header-item')}>
                                 <div className={cx('header-title')}>
                                     <Assignment style={{ ...iconStyle, fontSize: '4rem', color: 'var(--primary)' }} />
-                                    <span>Posts</span>
+                                    <span>Bài viết</span>
                                 </div>
                                 <span className={cx('header-count')}>{countAll.countPost}</span>
                             </div>
                             <div className={cx('header-item')}>
                                 <div className={cx('header-title')}>
                                     <Textsms style={{ ...iconStyle, fontSize: '4rem', color: 'var(--primary)' }} />
-                                    <span>Comments</span>
+                                    <span>Bình luận</span>
                                 </div>
                                 <span className={cx('header-count')}>{countAll.countComment}</span>
                             </div>

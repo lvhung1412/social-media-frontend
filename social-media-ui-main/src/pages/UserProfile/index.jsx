@@ -13,7 +13,7 @@ const Profile = () => {
     const isHeaderLayout = useSelector((state) => state.layout.isHeaderLayout);
 
     useEffect(() => {
-        document.title = 'Leaf | ' + params.username;
+        document.title = 'SC | ' + params.username;
     }, [params.username]);
 
     return (

@@ -61,7 +61,7 @@ const MainContent = () => {
                         dataLength={listPost.length}
                         next={fetchApi}
                         hasMore={hasMore}
-                        loader={<h1>Loading...</h1>}
+                        loader={<h1>Đang tải...</h1>}
                     >
                         {/* <StatusBar /> */}
                         {listPost &&

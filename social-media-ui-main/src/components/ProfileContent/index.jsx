@@ -72,7 +72,7 @@ const ProfileContent = () => {
     }, [userInfo]);
 
     useEffect(() => {
-        document.title = 'Leaf | Profile';
+        document.title = 'Hồ sơ';
         getCountFriend();
         listPostApi();
         // eslint-disable-next-line
@@ -120,7 +120,7 @@ const ProfileContent = () => {
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Edit profile successfully',
+                    title: 'Chỉnh sửa hồ sơ thành công',
                     showConfirmButton: false,
                     timer: 1000,
                 });
@@ -157,7 +157,7 @@ const ProfileContent = () => {
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Change avatar successfully',
+                    title: 'Thay đổi avatar thành công',
                     showConfirmButton: false,
                     timer: 1000,
                 });
@@ -174,12 +174,12 @@ const ProfileContent = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        toast.dark('Waiting a minute!', { autoClose: 2000 });
+        toast.dark('Đang chờ một chút!', { autoClose: 2000 });
         update();
         setModal(!modal);
     };
     const handleChange = () => {
-        toast.dark('Waiting a minute!', { autoClose: 2000 });
+        toast.dark('Đang chờ một chút!', { autoClose: 2000 });
         changeAvatar();
         setModal2(!modal2);
     };
@@ -196,7 +196,7 @@ const ProfileContent = () => {
     return (
         <div style={{ marginLeft: isHeaderLayout ? '0' : '25rem', marginTop: isHeaderLayout ? '6rem' : '0' }}>
             {isPostOpen && (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<div>Đang tải...</div>}>
                     <PostDetail onClose={closePost} />
                 </Suspense>
             )}
@@ -214,10 +214,10 @@ const ProfileContent = () => {
                     setListFriend([]);
                 }}
             >
-                <ModalHeader closeButton={true}>List friend</ModalHeader>
+                <ModalHeader closeButton={true}>Danh sách bạn bè</ModalHeader>
                 <ModalBody>
                     <div style={{ padding: '1rem' }}>
-                        <input placeholder="Search friend..." className={cx('input-search')} type="text" />
+                        <input placeholder="Tìm kiếm bạn bè..." className={cx('input-search')} type="text" />
                     </div>
                     <div className={cx('list-friend-content')}>
                         {listFriend &&
@@ -233,7 +233,7 @@ const ProfileContent = () => {
                                             </div>
                                         </div>
                                         <div className={cx('friend-btn')}>
-                                            <button onClick={() => unFollow(friend.username)}>Unfriend</button>
+                                            <button onClick={() => unFollow(friend.username)}>Hủy kết bạn</button>
                                         </div>
                                     </div>
                                 );
@@ -253,12 +253,12 @@ const ProfileContent = () => {
 
             {/* Change avatar modal */}
             <Modal centered show={modal2} onHide={() => setModal2(!modal2)}>
-                <ModalHeader closeButton={true}>Confirm change</ModalHeader>
+                <ModalHeader closeButton={true}>Thay đổi avatar</ModalHeader>
                 <ModalBody>
                     {avatar && <img src={avatar.preview} alt="avatar" width="100%" />}
                     <div className="d-flex justify-content-end">
                         <button className="btn btn-primary mt-3" style={{ fontSize: '1.5rem' }} onClick={handleChange}>
-                            Change
+                            Thay đổi
                         </button>
                     </div>
                 </ModalBody>
@@ -266,25 +266,25 @@ const ProfileContent = () => {
             {/* Edit profile modal */}
 
             <Modal centered show={modal} onHide={() => setModal(!modal)}>
-                <ModalHeader closeButton={true}>Edit Profile</ModalHeader>
+                <ModalHeader closeButton={true}>Chỉnh sửa thông tin</ModalHeader>
                 <ModalBody className="px-4">
                     <form onSubmit={handleSubmit} style={{ fontSize: '14px' }}>
                         <Row>
                             <div className="d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Name</label>
+                                    <label>Tên</label>
                                 </Col>
                                 <input
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     className="form-control"
-                                    placeholder="Enter Name"
+                                    placeholder="Nhập tên"
                                 />
                             </div>
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Username</label>
+                                    <label>Tên đăng nhập</label>
                                 </Col>
                                 <input
                                     type="text"
@@ -292,19 +292,19 @@ const ProfileContent = () => {
                                     onChange={(e) => setUsername(e.target.value)}
                                     disabled
                                     className="form-control"
-                                    placeholder="Enter Username"
+                                    placeholder="Nhập tên đăng nhập"
                                 />
                             </div>
 
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Bio</label>
+                                    <label>Tiểu sử</label>
                                 </Col>
                                 <textarea
                                     value={bio}
                                     onChange={(e) => setBio(e.target.value)}
                                     className="form-control"
-                                    placeholder="Enter bio"
+                                    placeholder="Nhập tiểu sử"
                                 />
                             </div>
 
@@ -318,24 +318,24 @@ const ProfileContent = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     disabled
                                     className="form-control"
-                                    placeholder="Enter Email"
+                                    placeholder="Nhập email"
                                 />
                             </div>
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Phone Number</label>
+                                    <label>Số điện thoại</label>
                                 </Col>
                                 <input
                                     type="text"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     className="form-control"
-                                    placeholder="Enter Phone"
+                                    placeholder="Nhập số điện thoại"
                                 />
                             </div>
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Birthday</label>
+                                    <label>Ngày sinh</label>
                                 </Col>
                                 <input
                                     type="date"
@@ -346,7 +346,7 @@ const ProfileContent = () => {
                             </div>
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Gender</label>
+                                    <label>Giới tính</label>
                                 </Col>
                                 <label style={{ marginRight: '20px' }}>
                                     <input
@@ -358,7 +358,7 @@ const ProfileContent = () => {
                                         onChange={(e) => setGender(e.target.value)}
                                         value="MALE"
                                     />
-                                    Male
+                                    Nam
                                 </label>
                                 <label style={{ marginRight: '20px' }}>
                                     <input
@@ -370,7 +370,7 @@ const ProfileContent = () => {
                                         onChange={(e) => setGender(e.target.value)}
                                         value="FEMALE"
                                     />
-                                    Female
+                                    Nữ
                                 </label>
                                 <label>
                                     <input
@@ -382,12 +382,12 @@ const ProfileContent = () => {
                                         onChange={(e) => setGender(e.target.value)}
                                         value="OTHER"
                                     />
-                                    Other
+                                    Khác
                                 </label>
                             </div>
                             <div className="mt-5 d-flex align-items-center">
                                 <Col lg={3}>
-                                    <label>Status</label>
+                                    <label>Trạng thái</label>
                                 </Col>
                                 <select
                                     role="button"
@@ -397,14 +397,14 @@ const ProfileContent = () => {
                                     id="status-post"
                                     className={cx('select-status')}
                                 >
-                                    <option value="PUBLIC">Public</option>
-                                    <option value="PRIVATE">Private</option>
+                                    <option value="PUBLIC">Công khai</option>
+                                    <option value="PRIVATE">Riêng tư</option>
                                 </select>
                             </div>
                         </Row>
                         <div className="d-flex justify-content-end">
                             <button className="btn btn-primary mt-3" style={{ fontSize: '1.5rem' }}>
-                                Submit
+                                Gửi
                             </button>
                         </div>
                     </form>
@@ -419,10 +419,10 @@ const ProfileContent = () => {
                             </div>
                             <div className={cx('avatar_action', `${isDarkMode ? 'theme-light' : ''}`)}>
                                 <div className={cx('action_item')} onClick={() => setToggler(!toggler)}>
-                                    View avatar
+                                    Xem ảnh đại diện
                                 </div>
                                 <div className={cx('action_item')} onClick={() => changeImage()}>
-                                    Change avatar
+                                    Thay đổi ảnh đại diện
                                 </div>
                                 <input
                                     type="file"
@@ -445,7 +445,7 @@ const ProfileContent = () => {
                                     className={cx('edit-profile', `${isDarkMode ? 'theme-dark' : ''}`)}
                                     onClick={() => setModal(!modal)}
                                 >
-                                    Edit profile
+                                    Chỉnh sửa hồ sơ
                                 </button>
                                 <button className={cx('settings', `${isDarkMode ? 'theme-dark' : ''}`)}>
                                     <FiSettings size="25px" />
@@ -453,7 +453,7 @@ const ProfileContent = () => {
                             </div>
                             <div className={cx('profile-follow')}>
                                 <h5 className={cx('profile-follow-count')}>
-                                    <span>{listPost.length}</span> {listPost.length > 1 ? 'posts': 'post'}
+                                    <span>{listPost.length}</span> {listPost.length > 1 ? 'bài viết': 'bài viết'}
                                 </h5>
                                 <h5
                                     className={cx('profile-follow-count')}
@@ -462,7 +462,7 @@ const ProfileContent = () => {
                                         getListFriend();
                                     }}
                                 >
-                                    <span>{countFriend}</span> {countFriend > 1 ? 'friends' : 'friend'}
+                                    <span>{countFriend}</span> {countFriend > 1 ? 'bạn bè' : 'bạn bè'}
                                 </h5>
                             </div>
                             <div className={cx('profile-bio')}>

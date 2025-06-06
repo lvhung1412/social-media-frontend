@@ -12,7 +12,7 @@ const Profile = () => {
     const isHeaderLayout = useSelector((state) => state.layout.isHeaderLayout);
 
     useEffect(() => {
-        document.title = 'SC | Profile';
+        document.title = 'Trang cá nhân';
     }, []);
 
     return (

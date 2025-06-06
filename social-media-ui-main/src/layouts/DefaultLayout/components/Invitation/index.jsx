@@ -58,7 +58,7 @@ const Notify = () => {
                 </div>
             )}
             <div className={cx('notify-result', !showResult && 'hidden', isDarkMode ? 'theme-dark' : '')}>
-                <h4 className={cx('notify-title')}>Friend Invitations</h4>
+                <h4 className={cx('notify-title')}>Lời mời kết bạn</h4>
                 {searchResult.length > 0 ? (
                     <div className={cx('list-notify')}>
                         {searchResult.map((result) => (
@@ -69,7 +69,7 @@ const Notify = () => {
                     </div>
                 ) : (
                     <div className={cx('result-notify')}>
-                        <span>No Invitation</span>
+                        <span>Không có lời mời</span>
                     </div>
                 )}
             </div>

@@ -92,7 +92,7 @@ const ChatList = () => {
     return (
         <div className={cx('chat-list')}>
             <div className={cx('heading')}>
-                <h2>Chat</h2>
+                <h2>Tin nhắn</h2>
                 <button className={cx('btn-nobg')}>
                     {/* <FaEllipsisH fill="black" /> */}
                     <Avatar src={userInfo.avatar} />

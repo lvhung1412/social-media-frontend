@@ -30,8 +30,8 @@ const NotifyItem = ({ user, changeCount, size = 2 }) => {
                 ]),
             );
             changeCount();
-            setNotify('Accepted');
-            const content = `${userInfo.avatar}###${userInfo.name} accepted your friendship invitation`;
+            setNotify('Đã chấp nhận');
+            const content = `${userInfo.avatar}###${userInfo.name} đã chấp nhận lời mời kết bạn của bạn`;
             createNotify(content, user.username);
         }
     };
@@ -72,13 +72,13 @@ const NotifyItem = ({ user, changeCount, size = 2 }) => {
             ) : (
                 <div className={cx('actions')}>
                     <button className={cx('btn-accept', size === 1 && 'small')} onClick={accept}>
-                        Accept
+                        Đồng ý
                     </button>
                     <button
                         className={cx('btn-deny', isDarkMode ? 'theme-dark' : '', size === 1 && 'small')}
                         onClick={deny}
                     >
-                        Deny
+                        Từ chối
                     </button>
                 </div>
             )}

@@ -324,7 +324,7 @@ const ChatContent = () => {
                         {!recordingAudio && !audio.preview && (
                             <input
                                 type="text"
-                                placeholder="Type a message here"
+                                placeholder="Nhập tin nhắn ở đây"
                                 onChange={(e) => setinputMsg(e.target.value)}
                                 value={inputMsg}
                             />

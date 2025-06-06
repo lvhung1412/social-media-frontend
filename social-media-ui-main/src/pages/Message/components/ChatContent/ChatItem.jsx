@@ -31,7 +31,7 @@ const ChatItem = ({ me, user, msg, time, type }) => {
                     <div className={cx('chat-msg')}>
                         <video controls alt="">
                             <source src={msg} type="video/mp4" />
-                            Your browser does not support the video tag.
+                            Trình duyệt của bạn không hỗ trợ thẻ video.
                         </video>
                     </div>
                 )}
@@ -39,7 +39,7 @@ const ChatItem = ({ me, user, msg, time, type }) => {
                     <div className={cx('chat-msg')}>
                         <audio controls alt="">
                             <source src={msg} />
-                            Your browser does not support the video tag.
+                            Trình duyệt của bạn không hỗ trợ thẻ audio.
                         </audio>
                     </div>
                 )}

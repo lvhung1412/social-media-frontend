@@ -25,8 +25,7 @@ const Home = () => {
         if (userInfo && userInfo.role.name === 'ADMIN') {
             dispatch(logoutUser());
             navigate('/login');
-        }
-        // eslint-disable-next-line
+        }        // eslint-disable-next-line
     }, []);
     return (
         <div className={cx('home')}>

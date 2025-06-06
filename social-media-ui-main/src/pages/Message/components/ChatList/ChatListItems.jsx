@@ -73,7 +73,7 @@ const ChatListItems = ({ data, active, isOnline, animationDelay, time }) => {
                         </span>
                     )
                 ) : (
-                    <span className={cx('active-time')}>Active now</span>
+                    <span className={cx('active-time')}>Đang hoạt động</span>
                 )}
             </div>
         </div>

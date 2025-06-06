@@ -25,7 +25,7 @@ const LoginAdmin = () => {
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'You login successfully',
+                    title: 'Bạn đăng nhập thành công!',
                     showConfirmButton: false,
                     timer: 1000,
                 });
@@ -60,12 +60,12 @@ const LoginAdmin = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!constant.FORMAT_EMAIL.test(email.trim())) {
-            toast.dark('Waiting a minute!');
+            toast.dark('Đang chờ một chút!');
             login();
         } else {
             Swal.fire({
                 icon: 'warning',
-                title: 'Username not allow space or special characters! Please try again.',
+                title: 'Tên đăng nhập không được chứa khoảng trắng hoặc ký tự đặc biệt! Vui lòng thử lại.',
                 showConfirmButton: true,
             });
         }
@@ -77,16 +77,16 @@ const LoginAdmin = () => {
                 <div className={cx('logo')}>
                     <img src={Logo} alt="" />
                 </div>
-                <h1>Login admin</h1>
+                <h1>Đăng nhập admin</h1>
                 <form onSubmit={handleLogin}>
-                    <input placeholder="Username..." value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input placeholder="Tên đăng nhập..." value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <input
                         type="password"
-                        placeholder="Password..."
+                        placeholder="Mật khẩu..."
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     ></input>
-                    <button>LOGIN</button>
+                    <button>ĐĂNG NHẬP</button>
                 </form>
             </div>
         </div>

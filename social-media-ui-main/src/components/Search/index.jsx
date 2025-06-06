@@ -129,7 +129,7 @@ const Search = ({ darkMode, chat = false }) => {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 style={{ marginLeft: '10px' }} className={cx('search-title')}>
-                            Accounts
+                            Tài khoản
                         </h4>
                         {searchResult.length > 0 ? (
                             searchResult.map((result) => (
@@ -149,7 +149,7 @@ const Search = ({ darkMode, chat = false }) => {
                             ))
                         ) : (
                             <div className={cx('result-notify')}>
-                                <span>No result</span>
+                                <span>Không có kết quả</span>
                             </div>
                         )}
                     </PopperWrapper>
@@ -162,7 +162,7 @@ const Search = ({ darkMode, chat = false }) => {
                     value={searchValue}
                     type="text"
                     ref={inputRef}
-                    placeholder="Search accounts"
+                    placeholder="Tìm kiếm tài khoản"
                     spellCheck={false}
                     onChange={handleChange}
                     onFocus={() => setShowResult(true)}

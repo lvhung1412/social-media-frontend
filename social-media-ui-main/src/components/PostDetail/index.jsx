@@ -21,11 +21,37 @@ import { LIST_REACTION } from '@/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import CommentItem from '@components/CommentItem';
 
+import { format, register } from 'timeago.js';
+
 const cx = classNames.bind(styles);
 
 TimeAgo.addLocale(en);
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
+
+// Định nghĩa locale tiếng Việt
+const viLocale = function (number, index, totalSec) {
+  return [
+    ['vừa xong', 'một lúc'],
+    ['%s giây trước', 'trong %s giây'],
+    ['1 phút trước', 'trong 1 phút'],
+    ['%s phút trước', 'trong %s phút'],
+    ['1 giờ trước', 'trong 1 giờ'],
+    ['%s giờ trước', 'trong %s giờ'],
+    ['1 ngày trước', 'trong 1 ngày'],
+    ['%s ngày trước', 'trong %s ngày'],
+    ['1 tuần trước', 'trong 1 tuần'],
+    ['%s tuần trước', 'trong %s tuần'],
+    ['1 tháng trước', 'trong 1 tháng'],
+    ['%s tháng trước', 'trong %s tháng'],
+    ['1 năm trước', 'trong 1 năm'],
+    ['%s năm trước', 'trong %s năm']
+  ][index];
+};
+
+// Đăng ký locale tiếng Việt
+register('vi', viLocale);
+
 
 const PostDetail = ({ onClose }) => {
     const dispatch = useDispatch();
@@ -68,7 +94,7 @@ const PostDetail = ({ onClose }) => {
                     updatedCountReaction[6] += 1;
                 }
                 if (detailPost.user.username !== userInfo.username) {
-                    const content = `${userInfo.avatar}###${userInfo.name} reaction on your post.`;
+                    const content = `${userInfo.avatar}###${userInfo.name} bày tỏ cảm xúc trên bài viết của bạn.`;
                     createNotify(content, detailPost.user.username);
                 }
                 dispatch(
@@ -181,22 +207,22 @@ const PostDetail = ({ onClose }) => {
                         if (repId) {
                             if (repUser !== userInfo.username) {
                                 if (detailPost.user.username === repUser) {
-                                    const content = `${userInfo.avatar}###${userInfo.name} replied your comment on your post.`;
+                                    const content = `${userInfo.avatar}###${userInfo.name} đã trả lời bình luận của bạn trên bài viết của bạn.`;
                                     createNotify(content, detailPost.user.username);
                                 } else {
-                                    const content1 = `${userInfo.avatar}###${userInfo.name} replied ${repName}'s comment on your post.`;
-                                    const content2 = `${userInfo.avatar}###${userInfo.name} replied your comment on ${detailPost.user.name}'s post.`;
+                                    const content1 = `${userInfo.avatar}###${userInfo.name} đã trả lời bình luận của ${repName} trên bài viết của bạn.`;
+                                    const content2 = `${userInfo.avatar}###${userInfo.name} đã trả lời bình luận của bạn trên bài viết của ${detailPost.user.name}.`;
                                     createNotify(content1, detailPost.user.username);
                                     createNotify(content2, repUser);
                                 }
                             } else {
-                                const content1 = `${userInfo.avatar}###${userInfo.name} replied ${
-                                    userInfo.gender === 'MALE' ? 'his' : 'her'
-                                } comment on your post.`;
+                                const content1 = `${userInfo.avatar}###${userInfo.name} đã trả lời ${
+                                    userInfo.gender === 'MALE' ? 'của anh ấy' : 'của cô ấy'
+                                } bình luận trên bài viết của bạn.`;
                                 createNotify(content1, detailPost.user.username);
                             }
                         } else {
-                            const content = `${userInfo.avatar}###${userInfo.name} commented on your post.`;
+                            const content = `${userInfo.avatar}###${userInfo.name} đã bình luận trên bài viết của bạn.`;
                             createNotify(content, detailPost.user.username);
                         }
                     }
@@ -321,7 +347,7 @@ const PostDetail = ({ onClose }) => {
                                     ) : (
                                         <video controls className={cx('video')}>
                                             <source src={detailPost.files[currentImageIndex].value} type="video/mp4" />
-                                            Your browser does not support the video tag.
+                                            Trình duyệt của bạn không hỗ trợ video này.
                                         </video>
                                     )}
                                 </div>
@@ -335,7 +361,7 @@ const PostDetail = ({ onClose }) => {
                                 <div className={cx('post-username', 'username-hover')}>
                                     <span>{detailPost.user.name}</span>
                                     <span className={cx('post-time')}>
-                                        {timeAgo.format(new Date(detailPost.createDate))}
+                                        {timeAgo.format(new Date(detailPost.createDate), 'vi')}
                                     </span>
                                 </div>
                             </div>
@@ -358,7 +384,7 @@ const PostDetail = ({ onClose }) => {
                                                                 className={cx('view-all')}
                                                                 onClick={() => fetchRepComment(comment.id)}
                                                             >
-                                                                View {comment.countRep} reply
+                                                                Xem {comment.countRep} phản hồi
                                                             </div>
                                                         )}
 
@@ -375,7 +401,7 @@ const PostDetail = ({ onClose }) => {
                                                                     className={cx('view-all')}
                                                                     onClick={() => hideRepComment(comment.id)}
                                                                 >
-                                                                    Hide reply
+                                                                    Ẩn phản hồi
                                                                 </div>
                                                             )}
                                                     </div>
@@ -435,7 +461,7 @@ const PostDetail = ({ onClose }) => {
                                     </div>
                                     <div className={cx('all-reaction')} onClick={() => setReactionModal(true)}>
                                         {detailPost.countReaction[6]}{' '}
-                                        {detailPost.countReaction[6] > 1 ? 'Likes' : 'Like'}
+                                        {detailPost.countReaction[6] > 1 ? 'lượt thích' : 'lượt thích'}
                                     </div>
                                 </div>
 
@@ -451,7 +477,7 @@ const PostDetail = ({ onClose }) => {
                                             ref={cmtRef}
                                             type="text"
                                             className={cx('post-input')}
-                                            placeholder="Add a comment..."
+                                            placeholder="Thêm bình luận..."
                                         />
                                         {repId && (
                                             <div
@@ -462,13 +488,13 @@ const PostDetail = ({ onClose }) => {
                                                 }}
                                             >
                                                 <span>
-                                                    Replying
+                                                    Đang trả lời
                                                     <br />@{repUser}
                                                 </span>
                                             </div>
                                         )}
                                         <button className={cx('post-btn')} disabled={comment === '' ? true : false}>
-                                            Post
+                                            Đăng
                                         </button>
                                     </div>
                                 </form>

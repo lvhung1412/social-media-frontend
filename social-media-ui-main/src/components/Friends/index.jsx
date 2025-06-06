@@ -30,7 +30,7 @@ const Friends = () => {
         <div>
             <div className={cx('friends__container')}>
                 <div className={cx('friends__header')}>
-                    <div>Suggested for you</div>
+                    <div>Gợi ý cho bạn</div>
                 </div>
                 <div className={cx('friends__body')}>
                     {listFriend &&

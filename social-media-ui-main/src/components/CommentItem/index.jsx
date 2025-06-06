@@ -26,8 +26,8 @@ const CommentItem = ({ data, isReply = false, onReplyClick }) => {
                     </div>
                     {!isReply && (
                         <div className={cx('action')}>
-                            <div>Like</div>
-                            <div onClick={onReplyClick}>Reply</div>
+                            <div>Thích</div>
+                            <div onClick={onReplyClick}>Phản hồi</div>
                             <div>{timeAgo.format(new Date(data.createDate))}</div>
                         </div>
                     )}

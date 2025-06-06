@@ -57,7 +57,7 @@ const CreatePost = ({ onClose, data }) => {
                         data.append('files', pictures[i]);
                     }
                 }
-                toast.dark('Uploading...', { position: 'bottom-right', autoClose: 15000 });
+                toast.dark('Đang tải...', { position: 'bottom-right', autoClose: 15000 });
                 const post = await PostService.createPost(data);
 
                 return post;
@@ -69,7 +69,7 @@ const CreatePost = ({ onClose, data }) => {
                     setCaption('');
                     setPictures([]);
                     toast.dismiss();
-                    toast.success('Post success', {
+                    toast.success('Đăng thành công', {
                         position: 'bottom-right',
                         autoClose: 1500,
                         hideProgressBar: true,
@@ -87,7 +87,7 @@ const CreatePost = ({ onClose, data }) => {
         e.preventDefault();
         try {
             if (caption) {
-                toast.dark('Updating...', { position: 'bottom-right', autoClose: 15000 });
+                toast.dark('Đang cập nhật...', { position: 'bottom-right', autoClose: 15000 });
                 const obj = {
                     value: caption,
                     security: selectedOption,
@@ -104,7 +104,7 @@ const CreatePost = ({ onClose, data }) => {
                 setCaption('');
                 setPictures([]);
                 toast.dismiss();
-                toast.success('Update success', {
+                toast.success('Cập nhật thành công', {
                     position: 'bottom-right',
                     autoClose: 1500,
                     hideProgressBar: true,
@@ -206,10 +206,10 @@ const CreatePost = ({ onClose, data }) => {
         const files = Array.from(e.target.files);
         const selectedFiles = [];
 
-        toast.dark('Uploading...', { position: 'bottom-right', autoClose: 4000 });
+        toast.dark('Đang tải...', { position: 'bottom-right', autoClose: 4000 });
 
         if (pictures.length + newPictures.length > 5) {
-            toast.warning('Only upload maximum 6 files', {
+            toast.warning('Chỉ được tải tối đa 6 tệp', {
                 position: 'bottom-right',
                 autoClose: 1500,
                 hideProgressBar: true,
@@ -231,7 +231,7 @@ const CreatePost = ({ onClose, data }) => {
                 if (!(checkImage?.predictions.length > 0 && checkImage?.predictions[0].confidence > 0.5)) {
                     selectedFiles.push(files[i]);
                 } else {
-                    toast.warning('Your image have violence action', {
+                    toast.warning('Hình ảnh của bạn có hành động bạo lực', {
                         position: 'bottom-right',
                         autoClose: 1500,
                         hideProgressBar: true,
@@ -245,7 +245,7 @@ const CreatePost = ({ onClose, data }) => {
             }
 
             if (selectedFiles.length + pictures.length + newPictures.length === 6) {
-                toast.warning('Only upload maximum 6 files', {
+                toast.warning('Chỉ được tải tối đa 6 tệp', {
                     position: 'bottom-right',
                     autoClose: 1500,
                     hideProgressBar: true,
@@ -327,7 +327,7 @@ const CreatePost = ({ onClose, data }) => {
             </div>
             <div className={cx('wrapper')}>
                 <div className={cx('post-title')}>
-                    <span>{data ? 'Edit your post' : 'Create a new post'}</span>
+                    <span>{data ? 'Chỉnh sửa bài viết' : 'Tạo bài viết mới'}</span>
                 </div>
                 <div className={cx('top')}>
                     <div className={cx('post-header')}>
@@ -343,8 +343,8 @@ const CreatePost = ({ onClose, data }) => {
                                 id="status-post"
                                 className={cx('select-status')}
                             >
-                                <option value="PUBLIC">Public</option>
-                                <option value="PRIVATE">Private</option>
+                                <option value="PUBLIC">Công khai</option>
+                                <option value="PRIVATE">Riêng tư</option>
                             </select>
                         </div>
                     </div>
@@ -355,7 +355,7 @@ const CreatePost = ({ onClose, data }) => {
                             spellCheck={false}
                             name="post-content"
                             id="post-content"
-                            placeholder="Caption for post..."
+                            placeholder="Tiêu đề cho bài đăng..."
                             onChange={(e) => setCaption(e.target.value)}
                         />
                     </div>
@@ -424,7 +424,7 @@ const CreatePost = ({ onClose, data }) => {
                             <div className={cx('wrap-title')}>
                                 <label htmlFor="post" role="button">
                                     <AddPhotoAlternate style={{ fontSize: '3.5rem' }} />
-                                    <span>Add your photo to share</span>
+                                    <span>Thêm bức ảnh của bạn để chia sẻ</span>
                                 </label>
                             </div>
                         )}
@@ -446,11 +446,11 @@ const CreatePost = ({ onClose, data }) => {
                 </div>
                 {data ? (
                     <div className={cx('share-btn')} onClick={handleUpdatePost}>
-                        Update
+                        Cập nhật
                     </div>
                 ) : (
                     <div className={cx('share-btn')} onClick={handlePost}>
-                        Share
+                        Chia sẻ
                     </div>
                 )}
             </div>

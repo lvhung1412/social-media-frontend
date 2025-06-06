@@ -1,5 +1,5 @@
 const initialState = {
-    status: 'ADD FRIEND',
+    status: 'KẾT BẠN',
     listFriend: [],
 };
 

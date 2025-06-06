@@ -45,14 +45,14 @@ const UserProfileContent = ({ username }) => {
     const unFollow = async () => {
         const result = await RelaService.deleteRelation(username);
         if (!result.data) {
-            dispatch(updateRelation('ADD FRIEND'));
+            dispatch(updateRelation('KẾT BẠN'));
         }
     };
     //handle add friend
     const handleAddFriend = async () => {
-        if (status === 'ADD FRIEND') {
+        if (status === 'KẾT BẠN') {
             await addFriend();
-        } else if (status === 'FRIEND') {
+        } else if (status === 'BẠN BÈ') {
             setModal(true);
         } else {
             await unFollow();
@@ -88,7 +88,7 @@ const UserProfileContent = ({ username }) => {
             if (result.data) {
                 dispatch(updateRelation(result.data.status));
             } else {
-                dispatch(updateRelation('ADD FRIEND'));
+                dispatch(updateRelation('KẾT BẠN'));
             }
         };
         fetchApi();
@@ -102,12 +102,12 @@ const UserProfileContent = ({ username }) => {
         <div style={{ marginLeft: isHeaderLayout ? '0' : '25rem', marginTop: isHeaderLayout ? '6rem' : '0' }}>
             <Modal show={modal} onHide={() => setModal(false)} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Unfriend</Modal.Title>
+                    <Modal.Title>Hủy kết bạn</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure to unfriend with {userProfile.name}?</Modal.Body>
+                <Modal.Body>Bạn có chắc chắn muốn hủy kết bạn với {userProfile.name}?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setModal(false)}>
-                        No
+                        Không
                     </Button>
                     <Button
                         variant="primary"
@@ -116,12 +116,12 @@ const UserProfileContent = ({ username }) => {
                             setModal(false);
                         }}
                     >
-                        Yes
+                        Có
                     </Button>
                 </Modal.Footer>
             </Modal>
             {isPostOpen && (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<div>Đang tải...</div>}>
                     <PostDetail onClose={closePost} />
                 </Suspense>
             )}
@@ -138,7 +138,7 @@ const UserProfileContent = ({ username }) => {
                             </div>
                             <div className={cx('avatar_action', `${isDarkMode ? 'theme-light' : ''}`)}>
                                 <div className={cx('action_item')} onClick={() => setToggler(!toggler)}>
-                                    View avatar
+                                    Xem ảnh đại diện
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@ const UserProfileContent = ({ username }) => {
                                     className={cx('edit-profile', `${isDarkMode ? 'theme-dark' : ''}`)}
                                     onClick={handleAddFriend}
                                 >
-                                    {status}
+                                    {(status === "WAITING" ? 'Đang chờ' : status === 'FRIEND' ? 'Hủy kết bạn': status)}
                                 </button>
                                 <button className={cx('settings', `${isDarkMode ? 'theme-dark' : ''}`)}>
                                     <FiSettings size="25px" />
@@ -158,15 +158,15 @@ const UserProfileContent = ({ username }) => {
                             </div>
                             <div className={cx('profile-follow')}>
                                 <h5 className={cx('profile-follow-count')}>
-                                    <span>{listPost.length}</span> {listPost.length > 1 ? 'posts' : 'post'}
+                                    <span>{listPost.length}</span> {listPost.length > 1 ? 'bài viết' : 'bài viết'}
                                 </h5>
                                 <h5 className={cx('profile-follow-count')}>
                                     <span>{userProfile.countFriend}</span>{' '}
-                                    {userProfile.countFriend > 1 ? 'friends' : 'friend'}
+                                    {userProfile.countFriend > 1 ? 'bạn bè' : 'bạn bè'}
                                 </h5>
                                 <h5 className={cx('profile-follow-count')}>
                                     <span>{userProfile.countCommonFriend}</span>{' '}
-                                    {userProfile.countCommonFriend > 1 ? 'mutual friends' : 'mutual friend'}
+                                    {userProfile.countCommonFriend > 1 ? 'bạn chung' : 'bạn chung'}
                                 </h5>
                             </div>
                             <div className={cx('profile-bio')}>
@@ -214,7 +214,7 @@ const UserProfileContent = ({ username }) => {
                                         <div className={cx('private-icon')}>
                                             <NoPhotography style={{ fontSize: '4rem' }} />
                                         </div>
-                                        <span>No post</span>
+                                        <span>Không có bài viết</span>
                                     </div>
                                 )
                             ) : (
@@ -222,7 +222,7 @@ const UserProfileContent = ({ username }) => {
                                     <div className={cx('private-icon')}>
                                         <Https style={{ fontSize: '4rem' }} />
                                     </div>
-                                    <span>This account is private</span>
+                                    <span>Tài khoản riêng tư</span>
                                 </div>
                             )
                         ) : listPost.length > 0 ? (
@@ -255,7 +255,7 @@ const UserProfileContent = ({ username }) => {
                                 <div className={cx('private-icon')}>
                                     <NoPhotography style={{ fontSize: '4rem' }} />
                                 </div>
-                                <span>No post</span>
+                                <span>Không có bài viết</span>
                             </div>
                         )}
                         {/* {listPost.length > 0 ? 

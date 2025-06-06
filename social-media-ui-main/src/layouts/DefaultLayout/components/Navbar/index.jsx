@@ -59,17 +59,21 @@ const Navbar = () => {
 
     //xử lý khi Logout
     const handleLogout = () => {
-        toast.dark('Waiting a minute!');
+        toast.dark('Đợi một chút!');
         setTimeout(() => {
             dispatch(updateCurrentRoom({}));
             dispatch(logoutUser());
             navigate('/login');
-        }, 1500);
+        }, 100);
         //set offline in firestore
         updateDoc(doc(db, 'user', userInfo.username), {
             isOnline: false,
             date: serverTimestamp(),
         });
+        localStorage.clear(); // hoặc
+        sessionStorage.clear();
+        dispatch({ type: 'RESET_USER' });
+
     };
 
     const roomsCondition = useMemo(() => {
@@ -147,7 +151,7 @@ const Navbar = () => {
                                 </span>
                                 <div className={cx(`${isDarkMode ? 'theme-light' : ''}`, 'dropdown-content')}>
                                     <div className={cx('dropdown-item')} onClick={toProfile}>
-                                        Profile
+                                        Hồ sơ
                                     </div>
                                     <div
                                         className={cx('dropdown-item')}
@@ -155,11 +159,11 @@ const Navbar = () => {
                                             dispatch(sidebarLayout());
                                         }}
                                     >
-                                        <span>Change layout</span>
+                                        <span>Thay đổi giao diện</span>
                                         <div title="Dark/Light mode" style={{ height: '30px' }}></div>
                                     </div>
                                     <div className={cx('dropdown-item')} onClick={handleLogout}>
-                                        <span>Logout</span>
+                                        <span>Đăng xuất</span>
                                     </div>
                                 </div>
                             </div>

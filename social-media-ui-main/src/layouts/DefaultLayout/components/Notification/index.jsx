@@ -77,7 +77,7 @@ const Notify = () => {
     return (
         <div className={cx('wrapper')} ref={notifyRef}>
             <NotificationsNoneOutlinedIcon
-                title="Notifications"
+                title="Thông báo"
                 className={cx('notify-icon')}
                 style={{ fontSize: '3rem', transition: 'all 0.3s' }}
             />
@@ -88,10 +88,10 @@ const Notify = () => {
             )}
             <div className={cx('notify-result', !showResult && 'hidden', isDarkMode ? 'theme-dark' : '')}>
                 <div className={cx('top')}>
-                    <h4 className={cx('notify-title')}>Notifications</h4>
+                    <h4 className={cx('notify-title')}>Thông báo</h4>
                     <div className={cx('mark')} onClick={seenAll}>
                         <BsCheckAll size={24} />
-                        Mark all seen
+                        Đánh dấu tất cả đã xem
                     </div>
                 </div>
                 {searchResult.length > 0 ? (
@@ -104,7 +104,7 @@ const Notify = () => {
                     </div>
                 ) : (
                     <div className={cx('result-notify')}>
-                        <span>No notify</span>
+                        <span>Không có thông báo</span>
                     </div>
                 )}
             </div>

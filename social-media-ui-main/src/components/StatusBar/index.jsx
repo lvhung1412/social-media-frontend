@@ -41,7 +41,7 @@ const StatusBar = () => {
                 <div className="circle">
                     <img className="statusBar__status" src={userInfo.avatar} alt="avatar" />
                 </div>
-                <div className="statusBar__text">Me</div>
+                <div className="statusBar__text">Tôi</div>
             </div>
             {listFriend &&
                 listFriend.slice(0, 10).map((item, index) => (

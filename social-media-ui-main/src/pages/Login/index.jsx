@@ -41,7 +41,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = 'Social | Login';
+        document.title = 'Đăng nhập';
     });
     //Hàm kiểm tra login
     const checkLogin = (result) => {
@@ -49,14 +49,15 @@ const Login = () => {
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'You login successfully',
+                    title: 'Bạn đã đăng nhập thành công',
                     showConfirmButton: false,
-                    timer: 1000,
+                    timer: 10,
                 });
                 setTimeout(() => {
                     dispatch(loginUser(result.data.userInfo, result.data.token));
+                    window.location.reload();
                     navigate('/');
-                }, 1000);
+                }, 10);
             }, constant.TIME_WAITING);
             updateDoc(doc(db, 'user', email.trim()), {
                 isOnline: true,
@@ -87,12 +88,12 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!constant.FORMAT_EMAIL.test(email.trim())) {
-            toast.dark('Waiting a minute!');
+            toast.dark('Đợi một chút!');
             login();
         } else {
             Swal.fire({
                 icon: 'warning',
-                title: 'Username not allow space or special characters! Please try again.',
+                title: 'Tên đăng nhập không được chứa khoảng trắng hoặc ký tự đặc biệt! Vui lòng thử lại.',
                 showConfirmButton: true,
             });
         }
@@ -102,7 +103,7 @@ const Login = () => {
         if (emailReset === '' || emailReset.length < 10) {
             Swal.fire({
                 icon: 'error',
-                text: 'Please enter your email and try again',
+                text: 'Vui lòng nhập email của bạn và thử lại',
             });
         } else {
                 setModal(!modal); // mở modal nhập mã xác thực
@@ -110,15 +111,15 @@ const Login = () => {
                 if(response.success) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Email sent',
-                    text: 'Check your email and reset password',
+                    title: 'Email đã được gửi',
+                    text: 'Kiểm tra email của bạn và đặt lại mật khẩu',
                 });
                 setModal2(!modal2); // mở modal nhập mã xác thực
             }else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Failed',
-                    text: 'Could not send verification code.',
+                    title: 'Thất bại',
+                    text: 'Không thể gửi mã xác thực.',
                 });
             }
         }
@@ -140,22 +141,22 @@ const Login = () => {
             setVerificationStep(false); // chuyển sang bước nhập mật khẩu
             Swal.fire({
                 icon: 'success',
-                title: 'Code verified',
-                text: 'You can now change your password.',
+                title: 'Mã xác thực hợp lệ',
+                text: 'Bạn có thể thay đổi mật khẩu của mình.',
             });
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Invalid code',
-                text: 'Please enter the correct verification code.',
+                title: 'Mã không hợp lệ',
+                text: 'Vui lòng nhập đúng mã xác thực.',
             });
         }
     } catch (error) {
         // Khi server trả lỗi (ví dụ 400, 401)
         Swal.fire({
             icon: 'error',
-            title: 'Verification failed',
-            text: error.response?.data?.message || 'An error occurred during verification.',
+            title: 'Xác thực không thành công',
+            text: error.response?.data?.message || 'Đã xảy ra lỗi trong quá trình xác thực.',
         });
     }
 };
@@ -165,14 +166,14 @@ const Login = () => {
     if (newPassword !== confirmPassword) {
         Swal.fire({
             icon: 'error',
-            title: 'Passwords do not match',
+            title: 'Mật khẩu không khớp',
         });
         return;
     }
     if (newPassword.trim().length < 8) {
         Swal.fire({
             icon: 'error',
-            title: 'Password must be at least 8',
+            title: 'Mật khẩu phải có ít nhất 8 ký tự',
         });
 
         return;
@@ -181,7 +182,7 @@ const Login = () => {
     if (newPassword.trim().search(/[0-9]/) < 0) {
         Swal.fire({
             icon: 'error',
-            title: 'Password must be contain at least one digit',
+            title: 'Mật khẩu phải chứa ít nhất một chữ số',
         });
 
         return;
@@ -190,7 +191,7 @@ const Login = () => {
     if (newPassword.trim().search(/[a-z]/) < 0) {
         Swal.fire({
             icon: 'error',
-            title: 'Password must be contain at least one lowercase letter',
+            title: 'Mật khẩu phải chứa ít nhất một chữ cái thường',
         });
 
         return;
@@ -199,7 +200,7 @@ const Login = () => {
     if (newPassword.trim().search(/[A-Z]/) < 0) {
         Swal.fire({
             icon: 'error',
-            title: 'Password must be contain at least one uppercase letter',
+            title: 'Mật khẩu phải chứa ít nhất một chữ cái hoa',
         });
 
         return;
@@ -211,8 +212,8 @@ const Login = () => {
         if (response.success) {
             Swal.fire({
                 icon: 'success',
-                title: 'Reset successfully',
-                text: 'Your password has been changed',
+                title: 'Đặt lại thành công',
+                text: 'Mật khẩu của bạn đã được thay đổi',
             });
             setModal2(false);
             setEmail(emailReset);
@@ -222,8 +223,8 @@ const Login = () => {
     } catch (error) {
         Swal.fire({
             icon: 'error',
-            title: 'Something went wrong',
-            text: 'Please try again',
+            title: 'Đã xảy ra lỗi',
+            text: 'Vui lòng thử lại',
         });
     }
 };
@@ -233,7 +234,7 @@ const Login = () => {
             <ToastContainer />
             <Modal centered show={modal} onHide={() => setModal(!modal)}>
             <ModalHeader closeButton={true}>
-                Reset password
+                Đặt lại mật khẩu
             </ModalHeader>
             <ModalBody>
                 {step === 'email' && (
@@ -250,7 +251,7 @@ const Login = () => {
                                     type="email"
                                     spellCheck={false}
                                     className="form-control"
-                                    placeholder="Enter your email to reset"
+                                    placeholder="Nhập email của bạn để đặt lại"
                                 />
                             </div>
                         </Row>
@@ -261,7 +262,7 @@ const Login = () => {
                                 className="btn btn-primary mt-3"
                                 style={{ fontSize: '1.5rem' }}
                             >
-                                Submit
+                                Gửi
                             </button>
                         </div>
                     </form>
@@ -271,14 +272,14 @@ const Login = () => {
                         <Row>
                             <div className="d-flex align-items-center py-3">
                                 <Col lg={3}>
-                                    <label>Verification Code:</label>
+                                    <label>Mã xác thực:</label>
                                 </Col>
                                 <input
                                     required
                                     type="text"
                                     spellCheck={false}
                                     className="form-control"
-                                    placeholder="Enter the verification code"
+                                    placeholder="Nhập mã xác thực"
                                     value={inputCode}
                                     onChange={(e) => setInputCode(e.target.value)}
                                 />
@@ -291,7 +292,7 @@ const Login = () => {
                                 className="btn btn-primary mt-3"
                                 style={{ fontSize: '1.5rem' }}
                             >
-                                Verify Code
+                                Xác thực mã
                             </button>
                         </div>
                     </form>
@@ -299,21 +300,21 @@ const Login = () => {
             </ModalBody>
         </Modal>
 <Modal centered show={modal2} onHide={() => setModal2(!modal2)}>
-    <ModalHeader closeButton={true}>Reset password</ModalHeader>
+    <ModalHeader closeButton={true}>Đặt lại mật khẩu</ModalHeader>
     <ModalBody>
         {/* Bước 1: Nhập mã xác thực */}
         {verificationStep ? (
             <form onSubmit={handleVerifyCode}>
                 <div className="d-flex align-items-center py-3">
                     <Col lg={3}>
-                        <label>Verification Code:</label>
+                        <label>Mã xác thực:</label>
                     </Col>
                     <input
                         required
                         type="text"
                         spellCheck={false}
                         className="form-control"
-                        placeholder="Enter verification code"
+                        placeholder="Nhập mã xác thực"
                         value={verificationCode}
                         onChange={(e) => setVerificationCode(e.target.value)}
                     />
@@ -324,7 +325,7 @@ const Login = () => {
                         className="btn btn-primary mt-3"
                         style={{ fontSize: '1.5rem' }}
                     >
-                        Verify Code
+                        Xác thực
                     </button>
                 </div>
             </form>
@@ -334,28 +335,28 @@ const Login = () => {
                 <Row>
                     <div className="d-flex align-items-center py-3">
                         <Col lg={3}>
-                            <label>Password:</label>
+                            <label>Mật khẩu:</label>
                         </Col>
                         <input
                             required
                             type="password"
                             spellCheck={false}
                             className="form-control"
-                            placeholder="Enter your new password"
+                            placeholder="Nhập mật khẩu mới"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </div>
                     <div className="d-flex align-items-center py-3">
                         <Col lg={3}>
-                            <label>Confirm password:</label>
+                            <label>Xác nhận mật khẩu:</label>
                         </Col>
                         <input
                             required
                             type="password"
                             spellCheck={false}
                             className="form-control"
-                            placeholder="Confirm password again"
+                            placeholder="Nhập lại mật khẩu"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
@@ -368,7 +369,7 @@ const Login = () => {
                         className="btn btn-primary mt-3"
                         style={{ fontSize: '1.5rem' }}
                     >
-                        Submit
+                        Gửi
                     </button>
                 </div>
             </form>
@@ -384,7 +385,7 @@ const Login = () => {
                     <Col style={{ padding: '0' }}>
                         <div className={'right'}>
                             <img src={Logo} alt="Logo" />
-                            <h1 className={'title'}>Social media</h1>
+                            <h1 className={'title'}>Mạng xã hội</h1>
                             <form onSubmit={handleLogin}>
                                 <input
                                     required
@@ -392,26 +393,26 @@ const Login = () => {
                                     spellCheck={false}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Email, username or phone"
+                                    placeholder="Email, tên đăng nhập hoặc số điện thoại"
                                 />
                                 <input
                                     required
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Password"
+                                    placeholder="Mật khẩu"
                                 />
-                                <button>Login</button>
+                                <button>Đăng nhập</button>
                             </form>
                             <p className={'align-left'} style={{ cursor: 'pointer' }} onClick={() => setModal(!modal)}>
-                                Forgot password?
+                                Quên mật khẩu?
                             </p>
 
                             <p className={'align-left'}>
-                                Don't have account?{' '}
+                                Bạn chưa có tài khoản?{' '}
                                 <span>
                                     <Link to="/register" className="register-now">
-                                        Register now
+                                        Đăng ký ngay
                                     </Link>
                                 </span>
                             </p>

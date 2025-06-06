@@ -98,7 +98,7 @@ const Post = ({ data }) => {
                 );
 
                 if (data.user.username !== userInfo.username) {
-                    const content = `${userInfo.avatar}###${userInfo.name} commented on your post.`;
+                    const content = `${userInfo.avatar}###${userInfo.name} đã bình luận vào bài viết của bạn.`;
                     createNotify(content, data.user.username);
                 }
             }
@@ -115,7 +115,7 @@ const Post = ({ data }) => {
             hiddenApi().then((data) => {
                 if (data.success) {
                     dispatch(updateListPost(listPost.filter((item) => !(item.id === data.data.id))));
-                    toast.success('Hidden post success', {
+                    toast.success('Ẩn bài viết thành công', {
                         position: 'bottom-right',
                         autoClose: 1500,
                         hideProgressBar: true,
@@ -128,7 +128,7 @@ const Post = ({ data }) => {
             });
         } else {
             dispatch(updateListPost(listPost.filter((item) => !(item.id === data.id))));
-            toast.info('Hidden post on your new feed', {
+            toast.info('Đã ẩn bài viết', {
                 position: 'bottom-right',
                 autoClose: 1500,
                 hideProgressBar: true,
@@ -192,7 +192,7 @@ const Post = ({ data }) => {
                     updatedCountReaction[6] += 1;
                 }
                 if (data.user.username !== userInfo.username) {
-                    const content = `${userInfo.avatar}###${userInfo.name} reaction on your post.`;
+                    const content = `${userInfo.avatar}###${userInfo.name} bày tỏ cảm xúc vào bài viết của bạn.`;
                     createNotify(content, data.user.username);
                 }
 
@@ -249,7 +249,7 @@ const Post = ({ data }) => {
             {/* {isPostOpen && <PostDetail onClose={closePost} />} */}
 
             {isPostOpen && (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<div>Đang tải...</div>}>
                     <PostDetail onClose={closePost} />
                 </Suspense>
             )}
@@ -260,18 +260,18 @@ const Post = ({ data }) => {
             <Modal size="sm" centered show={modal} onHide={() => setModal(!modal)}>
                 <ModalBody bsPrefix="modal-custom">
                     {userInfo.username && data.user.username && userInfo.username === data.user.username && (
-                        <div className={cx('more-action')}>Delete post</div>
+                        <div className={cx('more-action')}>Xóa bài viết</div>
                     )}
                     <div className={cx('more-action')} onClick={hiddenPost}>
-                        Hidden post
+                        Ẩn bài viết
                     </div>
                     {userInfo.username === data.user.username && (
                         <div className={cx('more-action')} onClick={editPost}>
-                            Edit post
+                            Chỉnh sửa bài viết
                         </div>
                     )}
                     <div className={cx('more-action')} onClick={() => setModal(!modal)}>
-                        Cancel
+                        Hủy
                     </div>
                 </ModalBody>
             </Modal>
@@ -338,7 +338,7 @@ const Post = ({ data }) => {
                                 style={{ width: '700px', height: '600px', objectFit: 'contain', background: '#181818' }}
                             >
                                 <source src={data.files[currentImageIndex].value} type="video/mp4" />
-                                Your browser does not support the video tag.
+                                Trình duyệt của bạn không hỗ trợ loại video này.
                             </video>
                         )}
                     </div>
@@ -354,7 +354,7 @@ const Post = ({ data }) => {
                 
             {/* Reaction, Comment, Share */}
             <div>
-                <div style={{ marginBottom: '15px', display: 'flex', padding: '0 1rem', alignItems: 'center'}}>
+                <div style={{ marginBottom: '3px', display: 'flex', padding: '0 1rem', alignItems: 'center'}}>
                     <div className={cx('dropdown-icons')} style={{ paddingBottom: '3px'}}>
                         {LIST_REACTION.map((item, index) => {
                             if (item.name === data.likedPost) {
@@ -400,7 +400,7 @@ const Post = ({ data }) => {
                     <FiSend size="25px" className={cx('post__reactIcon')} />
                 </div>
                 <div style={{ fontSize: '14px', marginLeft: '20px', marginBottom: '10px', fontWeight: '100' }}>
-                    {data.countReaction[6]} {data.countReaction[6] > 1 ? 'Likes' : 'Like'}
+                    {data.countReaction[6]} {data.countReaction[6] > 1 ? 'lượt thích' : 'lượt thích'}
                 </div>
             </div>
 
@@ -494,7 +494,7 @@ const Post = ({ data }) => {
                     )} */}
                 {data.countComment > 0 && (
                     <div className={cx('view-all')} onClick={openPost}>
-                        View {data.countComment} {data.countComment > 1 ? 'comments' : 'comment'}
+                        Xem {data.countComment} {data.countComment > 1 ? 'bình luận' : 'bình luận'}
                     </div>
                 )}
 
@@ -510,11 +510,11 @@ const Post = ({ data }) => {
                             ref={cmtRef}
                             type="text"
                             className={cx(`${isDarkMode ? 'post-theme-dark' : ''}`, 'post__commentInput')}
-                            placeholder="Add a comment..."
+                            placeholder="Thêm bình luận..."
                         />
 
                         <button className={cx('post-btn')} disabled={comment === '' ? true : false}>
-                            Post
+                            Đăng
                         </button>
                     </div>
                 </form>

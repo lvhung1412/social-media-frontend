@@ -26,7 +26,7 @@ const Register = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        document.title = 'Leaf | Register';
+        document.title = 'Đăng ký';
     });
 
     //
@@ -35,7 +35,7 @@ const Register = () => {
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
-                    title: 'You create account successfully',
+                    title: 'Bạn đã tạo tài khoản thành công',
                     showConfirmButton: false,
                     timer: 1000,
                 });
@@ -92,7 +92,7 @@ const Register = () => {
         if (username.trim().length < 8) {
             Swal.fire({
                 icon: 'error',
-                title: 'Username must be at least 8 characters long',
+                title: 'Tên đăng nhập phải có ít nhất 8 ký tự',
             });
             return;
         }
@@ -100,7 +100,7 @@ const Register = () => {
         if (constant.FORMAT.test(username.trim())) {
             Swal.fire({
                 icon: 'error',
-                title: 'Username not allow space or special characters',
+                title: 'Tên đăng nhập không được chứa khoảng trắng hoặc ký tự đặc biệt',
             });
             return;
         }
@@ -108,7 +108,7 @@ const Register = () => {
         if (constant.FORMAT_EMAIL.test(email.trim())) {
             Swal.fire({
                 icon: 'error',
-                title: 'Email not allow space or special characters',
+                title: 'Email không được chứa khoảng trắng hoặc ký tự đặc biệt',
             });
 
             return;
@@ -117,7 +117,7 @@ const Register = () => {
         if (password.trim().length < 8) {
             Swal.fire({
                 icon: 'error',
-                title: 'Password must be at least 8',
+                title: 'Mật khẩu phải có ít nhất 8 ký tự',
             });
 
             return;
@@ -126,7 +126,7 @@ const Register = () => {
         if (password.trim().search(/[0-9]/) < 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Password must be contain at least one digit',
+                title: 'Mật khẩu phải có ít nhất một chữ số',
             });
 
             return;
@@ -135,7 +135,7 @@ const Register = () => {
         if (password.trim().search(/[a-z]/) < 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Password must be contain at least one lowercase letter',
+                title: 'Mật khẩu phải có ít nhất một chữ cái thường',
             });
 
             return;
@@ -144,7 +144,7 @@ const Register = () => {
         if (password.trim().search(/[A-Z]/) < 0) {
             Swal.fire({
                 icon: 'error',
-                title: 'Password must be contain at least one uppercase letter',
+                title: 'Mật khẩu phải có ít nhất một chữ cái hoa',
             });
 
             return;
@@ -153,12 +153,12 @@ const Register = () => {
         if (password.trim() !== confirm) {
             Swal.fire({
                 icon: 'error',
-                title: 'Password not match',
+                title: 'Mật khẩu không khớp',
             });
 
             return;
         }
-        toast.dark('Waiting for register');
+        toast.dark('Đang chờ một chút!');
         register();
     };
     return (
@@ -169,20 +169,19 @@ const Register = () => {
                     <Col style={{ padding: '0' }}>
                         <div className="left">
                             <img src={Logo} alt="" />
-                            <h1 className="title">Social</h1>
-                            {/* <p className="slowgan">Gone with the wind</p> */}
+                            <h1 className="title">Mạng xã hội</h1>
                             <form onSubmit={handleRegister}>
                                 <input
                                     type="text"
                                     value={name}
-                                    placeholder="Fullname"
+                                    placeholder="Tên đầy đủ"
                                     onChange={(e) => setName(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="text"
                                     value={username}
-                                    placeholder="Username"
+                                    placeholder="Tên đăng nhập"
                                     onChange={(e) => setuUsername(e.target.value)}
                                     required
                                 />
@@ -196,14 +195,14 @@ const Register = () => {
                                 <input
                                     type="tel"
                                     value={phone}
-                                    placeholder="Phone number"
+                                    placeholder="Số điện thoại"
                                     onChange={(e) => setPhone(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="password"
                                     value={password}
-                                    placeholder="Password"
+                                    placeholder="Mật khẩu"
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
@@ -211,18 +210,18 @@ const Register = () => {
                                 <input
                                     type="password"
                                     value={confirm}
-                                    placeholder="Confirm Password"
+                                    placeholder="Xác nhận mật khẩu"
                                     onChange={(e) => setConfirm(e.target.value)}
                                     required
                                 />
-                                <button type="submit">Register</button>
+                                <button type="submit">Đăng ký</button>
                             </form>
 
                             <p className="align-left">
-                                If you have account?{' '}
+                                Bạn đã có tài khoản?{' '}
                                 <span>
                                     <Link to="/login" className="register-now">
-                                        Login now
+                                        Đăng nhập ngay
                                     </Link>
                                 </span>
                             </p>
